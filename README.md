@@ -1,0 +1,1 @@
+# living-npc-platform-v0.5.0

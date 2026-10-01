@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pnevma-edge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pnevma-edge
+  template:
+    metadata:
+      labels:
+        app: pnevma-edge
+    spec:
+      containers:
+        - name: pnevma-edge
+          image: pnevma-edge-unique:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pnevma-edge
+spec:
+  selector:
+    app: pnevma-edge
+  ports:
+    - port: 8000
+      targetPort: 8000

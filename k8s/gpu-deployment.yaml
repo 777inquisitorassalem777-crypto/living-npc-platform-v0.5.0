@@ -1,0 +1,23 @@
+# Опциональный профиль GPU.
+# Для реального GPU workload необходимо заменить image на CUDA/PyTorch image
+# и установить NVIDIA device plugin в кластере.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pnevma-edge-gpu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pnevma-edge-gpu
+  template:
+    metadata:
+      labels:
+        app: pnevma-edge-gpu
+    spec:
+      containers:
+        - name: pnevma-edge
+          image: pnevma-edge-unique:latest
+          resources:
+            limits:
+              nvidia.com/gpu: 1

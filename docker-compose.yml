@@ -1,0 +1,10 @@
+services:
+  pnevma:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - pnevma_state:/app/state
+
+volumes:
+  pnevma_state:
